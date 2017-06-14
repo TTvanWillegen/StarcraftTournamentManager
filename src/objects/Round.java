@@ -22,10 +22,10 @@ public class Round {
 		this(pouleOrder);
 		this.pouleList = pouleList;
 	}
-	/** Returns the next @link{objects.Poule} in the sequence, based on the @link{objects.Order} that is provided.
+	/** Returns the next {@link objects.Poule} in the sequence, based on the {@link objects.Order} that is provided.
 	 *
-	 * @return Next @link{objects.Poule} in line as defined by the @link{objects.Order}
-	 * @throws OrderNotDefinedException Throws this exception when there is no @link{objects.Order} defined in the Poule
+	 * @return Next {@link objects.Poule} in line as defined by the {@link objects.Order}
+	 * @throws OrderNotDefinedException Throws this exception when there is no {@link objects.Order} defined in the Poule
 	 */
 	public Poule getNextPoule() throws OrderNotDefinedException{
 		if(pouleOrder == Order.LINEAR){
@@ -36,9 +36,9 @@ public class Round {
 		throw new OrderNotDefinedException();
 	}
 
-	/** Removes a @link{objects.Poule} from the list and returns *true* if it is removed.
+	/** Removes a {@link objects.Poule} from the list and returns *true* if it is removed.
 	 *
-	 * @param pouleToRemove The @link{objects.Poule} to remove from the @link{objects.Poule}
+	 * @param pouleToRemove The {@link objects.Poule} to remove from the {@link objects.Poule}
 	 * @return (boolean) *true* if removed, *false* if not.
 	 */
 	public boolean removePoule(Poule pouleToRemove){

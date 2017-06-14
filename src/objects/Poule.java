@@ -24,10 +24,10 @@ public class Poule {
 		this.matchList = matches;
 	}
 
-	/** Returns the next @link{objects.Match} in the sequence, based on the @link{objects.Order} that is provided.
+	/** Returns the next {@link objects.Match} in the sequence, based on the {@link objects.Order} that is provided.
 	 *
-	 * @return Next @link{objects.Match} in line as defined by the @link{objects.Order}, will always be a @link{objects.Match} with @link{objects.MatchState#In_Line}
-	 * @throws OrderNotDefinedException Throws this exception when there is no @link{objects.Order} defined in the Poule
+	 * @return Next {@link objects.Match} in line as defined by the {@link objects.Order}, will always be a {@link objects.Match} with {@link objects.MatchState#IN_LINE}
+	 * @throws OrderNotDefinedException Throws this exception when there is no {@link objects.Order} defined in the Poule
 	 */
 	public Match getNextMatch() throws OrderNotDefinedException{
 		if(matchOrder == Order.LINEAR){
@@ -38,9 +38,9 @@ public class Poule {
 		throw new OrderNotDefinedException();
 	}
 
-	/** Removes a @link{objects.Match} from the list and returns *true* if it is removed.
+	/** Removes a {@link objects.Match} from the list and returns *true* if it is removed.
 	 *
-	 * @param matchToRemove The @link{objects.Match} to remove from the @link{objects.Poule}
+	 * @param matchToRemove The {@link objects.Match} to remove from the {@link objects.Poule}
 	 * @return (boolean) *true* if removed, *false* if not.
 	 */
 	public boolean removeMatch(Match matchToRemove){

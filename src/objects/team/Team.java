@@ -1,4 +1,4 @@
-package objects;
+package objects.team;
 
 /**
  * @author Toby T. van Willegen
@@ -6,18 +6,28 @@ package objects;
  */
 public class Team {
 	private String name;
-	private Race race;
+	private TeamRace teamRace;
 	private int wins;
 	private int plays;
-	public Team(String name, Race race){
+
+	public Team(String name, TeamRace teamRace) {
 		this.name = name;
-		this.race = race;
+		this.teamRace = teamRace;
 		this.wins = 0;
 		this.plays = 0;
 	}
+
+	/**
+	 * Increments the lost {@link objects.match.Match} counter for this
+	 * {@link Team}
+	 */
 	public void addLost(){
 		this.plays++;
 	}
+
+	/** Increments the won {@link objects.match.Match} counter for this
+	 * {@link Team}
+	 */
 	public void addWin(){
 		this.wins++;
 		this.plays++;
@@ -27,8 +37,8 @@ public class Team {
 		return name;
 	}
 
-	public Race getRace() {
-		return race;
+	public TeamRace getTeamRace() {
+		return teamRace;
 	}
 
 	public int getWins() {
@@ -59,13 +69,13 @@ public class Team {
 		if (name != null ? !name.equals(team.name) : team.name != null) {
 			return false;
 		}
-		return race == team.race;
+		return teamRace == team.teamRace;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = name != null ? name.hashCode() : 0;
-		result = 31 * result + (race != null ? race.hashCode() : 0);
+		result = 31 * result + (teamRace != null ? teamRace.hashCode() : 0);
 		result = 31 * result + wins;
 		result = 31 * result + plays;
 		return result;
@@ -73,9 +83,7 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team{" +
-			"name='" + name + '\'' +
-			", race=" + race +
+		return "Team{" + "name='" + name + '\'' + ", teamRace=" + teamRace +
 			", wins=" + wins +
 			", plays=" + plays +
 			'}';

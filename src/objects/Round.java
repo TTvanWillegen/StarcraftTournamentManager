@@ -15,37 +15,49 @@ public class Round {
 	private Random random = new Random();
 	private Order pouleOrder;
 
-	public Round(Order pouleOrder){
+	public Round(Order pouleOrder) {
 		this.pouleOrder = pouleOrder;
 	}
-	public Round(Order pouleOrder, List<Poule> pouleList){
+
+	public Round(Order pouleOrder, List<Poule> pouleList) {
 		this(pouleOrder);
 		this.pouleList = pouleList;
 	}
-	/** Returns the next {@link objects.Poule} in the sequence, based on the {@link objects.Order} that is provided.
+
+	/**
+	 * Returns the next {@link objects.Poule} in the sequence, based on the
+	 * {@link objects.Order} that is provided.
 	 *
-	 * @return Next {@link objects.Poule} in line as defined by the {@link objects.Order}
-	 * @throws OrderNotDefinedException Throws this exception when there is no {@link objects.Order} defined in the Poule
+	 * @return Next {@link objects.Poule} in line as defined by the {@link
+	 * objects.Order}
+	 * @throws OrderNotDefinedException
+	 * 	Throws this exception when there is no {@link objects.Order} defined in
+	 * 	the Poule
 	 */
-	public Poule getNextPoule() throws OrderNotDefinedException{
-		if(pouleOrder == Order.LINEAR){
-			return getNextLinearPoule();
-		}else if(pouleOrder == Order.RANDOM){
-			return getNextRandomPoule();
+	public Poule getNextPoule() throws OrderNotDefinedException {
+		switch (pouleOrder) {
+			case LINEAR:
+				return getNextLinearPoule();
+			case RANDOM:
+				return getNextRandomPoule();
 		}
 		throw new OrderNotDefinedException();
 	}
 
-	/** Removes a {@link objects.Poule} from the list and returns *true* if it is removed.
+	/**
+	 * Removes a {@link objects.Poule} from the list and returns *true* if
+	 * it is
+	 * removed.
 	 *
-	 * @param pouleToRemove The {@link objects.Poule} to remove from the {@link objects.Poule}
-	 * @return (boolean) *true* if removed, *false* if not.
+	 * @param pouleToRemove
+	 * 	The {@link objects.Poule} to remove from the {@link objects.Poule}
+	 * @return (boolean) *True* if removed, *False* if not.
 	 */
-	public boolean removePoule(Poule pouleToRemove){
+	public boolean removePoule(Poule pouleToRemove) {
 		return pouleList.remove(pouleToRemove);
 	}
 
-	public void addPoule(Poule pouleToAdd){
+	public void addPoule(Poule pouleToAdd) {
 		pouleList.add(pouleToAdd);
 	}
 

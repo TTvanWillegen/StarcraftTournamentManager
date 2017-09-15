@@ -6,18 +6,25 @@ package objects;
  */
 public class Map {
 	private String mapName;
-	private int amountOfPeople;
-	public Map( String mapName, int amountOfPeople){
+	private int maxAmountOfTeams;
+
+	public Map(String mapName, int maxAmountOfTeams) {
 		this.mapName = mapName;
-		this.amountOfPeople = amountOfPeople;
+		this.maxAmountOfTeams = maxAmountOfTeams;
 	}
 
 	public String getMapName() {
 		return mapName;
 	}
 
-	public int getAmountOfPeople() {
-		return amountOfPeople;
+	/**
+	 * Returns the maximum amount of {@link objects.team.Team}s that can
+	 * play on this {@link Map}
+	 *
+	 * @return {@link int} the maximum amount of {@link objects.team.Team}s
+	 */
+	public int getMaxAmountOfTeams() {
+		return maxAmountOfTeams;
 	}
 
 	@Override
@@ -31,24 +38,23 @@ public class Map {
 
 		Map map = (Map) o;
 
-		if (amountOfPeople != map.amountOfPeople) {
+		if (maxAmountOfTeams != map.maxAmountOfTeams) {
 			return false;
 		}
-		return mapName != null ? mapName.equals(map.mapName) : map.mapName == null;
+		return mapName != null ? mapName.equals(map.mapName) : map.mapName ==
+				null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = mapName != null ? mapName.hashCode() : 0;
-		result = 31 * result + amountOfPeople;
+		result = 31 * result + maxAmountOfTeams;
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Map{" +
-			"mapName='" + mapName + '\'' +
-			", amountOfPeople=" + amountOfPeople +
-			'}';
+		return "Map{" + "mapName='" + mapName + '\'' + ", maxAmountOfTeams=" +
+			maxAmountOfTeams + '}';
 	}
 }

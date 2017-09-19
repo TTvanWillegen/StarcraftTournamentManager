@@ -1,8 +1,9 @@
 package objects.match;
 
-import com.sun.istack.internal.NotNull;
 import objects.Map;
 import objects.team.Team;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 
@@ -11,37 +12,37 @@ import java.util.List;
  * @version 1.1, 2017-06-13.
  */
 public class Match {
-	@NotNull
+	@NonNull
 	private List<Team> teams;
-	@NotNull
+	@NonNull
 	private MatchState matchState;
-	@NotNull
+	@NonNull
 	private MatchResult matchResult;
-	@NotNull
+	@NonNull
 	private Map map;
 
-	public Match(@NotNull List<Team> teams, @NotNull Map map) {
+	public Match(@NonNull List<Team> teams, @NonNull Map map) {
 		this.teams = teams;
 		this.matchState = MatchState.IN_LINE;
 		this.matchResult = MatchResultFactory.getInstance().newResult(teams);
 		this.map = map;
 	}
 
-	public Match(@NotNull List<Team> teams, @NotNull Map map,
-				 @NotNull MatchState matchState) {
+	public Match(@NonNull List<Team> teams, @NonNull Map map,
+				 @NonNull MatchState matchState) {
 		this(teams, map);
 		this.matchState = matchState;
 	}
 
-	public Match(@NotNull List<Team> teams, @NotNull Map map,
-				 @NotNull MatchResult matchResult) {
+	public Match(@NonNull List<Team> teams, @NonNull Map map,
+				 @NonNull MatchResult matchResult) {
 		this(teams, map);
 		this.matchResult = matchResult;
 	}
 
-	public Match(@NotNull List<Team> teams, @NotNull Map map,
-				 @NotNull MatchState matchState,
-				 @NotNull MatchResult matchResult) {
+	public Match(@NonNull List<Team> teams, @NonNull Map map,
+				 @NonNull MatchState matchState,
+				 @NonNull MatchResult matchResult) {
 		this(teams, map);
 		this.matchState = matchState;
 		this.matchResult = matchResult;
@@ -83,7 +84,7 @@ public class Match {
 
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(@Nullable Object o) {
 		if (this == o) {
 			return true;
 		}

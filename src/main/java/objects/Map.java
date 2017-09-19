@@ -1,5 +1,7 @@
 package objects;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
@@ -28,7 +30,7 @@ public class Map {
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(@Nullable Object o) {
 		if (this == o) {
 			return true;
 		}

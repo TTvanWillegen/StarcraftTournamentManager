@@ -1,8 +1,8 @@
 package objects.match;
 
-import com.sun.istack.internal.Nullable;
 import objects.team.Team;
 import objects.team.TeamScore;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

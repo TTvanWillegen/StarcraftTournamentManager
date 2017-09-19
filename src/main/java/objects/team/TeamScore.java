@@ -1,18 +1,23 @@
 package objects.team;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * @author Toby T. van Willegen
  * @version 1.1, 2017-09-14.
  */
 public class TeamScore {
+	@Nullable
 	private Team team;
+	@NonNull
 	private double score;
 
-	public TeamScore(Team team, double score) {
+	public TeamScore(@Nullable Team team, double score) {
 		this.team = team;
 		this.score = score;
 	}
-
+	@Nullable
 	public Team getTeam() {
 		return team;
 	}
@@ -53,7 +58,7 @@ public class TeamScore {
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(@Nullable Object o) {
 		if (this == o) {
 			return true;
 		}
@@ -63,7 +68,7 @@ public class TeamScore {
 
 		TeamScore teamScore1 = (TeamScore) o;
 
-		if (Double.compare(teamScore1.score, score) != 0) {
+		if(Double.compare(teamScore1.score, score) != 0) {
 			return false;
 		}
 		return

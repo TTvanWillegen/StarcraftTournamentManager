@@ -1,7 +1,7 @@
 package objects.match;
 
-import com.sun.istack.internal.NotNull;
 import objects.team.TeamScore;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.1, 2017-09-14.
  */
 public class MatchResult {
-	@NotNull
+	@NonNull
 	private List<TeamScore> teamScores;
 
 	public MatchResult(List<TeamScore> teamScores) {
@@ -37,7 +37,7 @@ public class MatchResult {
 	 * @return {@link objects.team.TeamScore} The highest {@link TeamScore}. If
 	 * multiple have the same score, chooses one randomly.
 	 */
-	@NotNull
+	@NonNull
 	public TeamScore getHighestScore() {
 		final TeamScore[] highestScore = {new TeamScore(null,
 														Double.MIN_VALUE)};

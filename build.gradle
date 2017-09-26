@@ -2,6 +2,7 @@ group 'nl.tobyvanwillegen'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'checkstyle'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -19,6 +20,11 @@ configurations {
     checkerFramework {
         description = 'The Checker Framework: custom pluggable types for Java'
     }
+}
+checkstyle {
+    configFile rootProject.file('GoogleChecks.xml')
+    showViolations true
+    toolVersion = '8.2'
 }
 
 dependencies {

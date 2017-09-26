@@ -61,6 +61,10 @@ dependencies {
     testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
 }
 
+junitPlatform {
+    reportsDir file('build/test-results/test')
+}
+junitPlatform.finalizedBy jacocoTestReport
 
 tasks.withType(JavaCompile).all { JavaCompile compile ->
     compile.options.compilerArgs = [
@@ -74,9 +78,7 @@ tasks.withType(JavaCompile).all { JavaCompile compile ->
     options.fork = true
     options.forkOptions.jvmArgs += ["-Xbootclasspath/p:${configurations.checkerFrameworkJavac.asPath}"]
 }
-test {
-    finalizedBy jacocoTestReport
-}
+
 
 jacocoTestReport {
     reports {

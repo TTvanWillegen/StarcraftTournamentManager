@@ -38,8 +38,10 @@ configurations {
 }
 checkstyle {
     configFile rootProject.file('GoogleChecks.xml')
-    showViolations true
+    showViolations = true
+    ignoreFailures = false
     toolVersion = '8.2'
+    //TODO: Add maxWarnings and maxErrors
 }
 
 dependencies {

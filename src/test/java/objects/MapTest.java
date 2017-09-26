@@ -1,16 +1,16 @@
 package objects;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static junit.framework.TestCase.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * @author Toby T. van Willegen
  * @version 1.1, 2017-09-26.
  */
-class MapTest {
+public class MapTest {
     @Test
-    void testEqualsTrue() {
+    public void testEqualsTrue() {
         Map map1 = new Map("MapA", 1);
         Map map2 = new Map("MapA", 1);
         assertTrue(map1.equals(map2));

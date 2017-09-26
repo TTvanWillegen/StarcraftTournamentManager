@@ -1,15 +1,6 @@
 group 'nl.tobyvanwillegen'
 version '1.0'
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4")
-    }
-}
-
 repositories {
     mavenCentral()
 }
@@ -17,12 +8,9 @@ repositories {
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'jacoco'
-apply plugin: 'org.junit.platform.gradle.plugin'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-ext.junitPlatformVersion = '1.0.0'
-ext.junitJupiterVersion  = '5.0.0'
 
 
 configurations {
@@ -53,18 +41,8 @@ dependencies {
     checkerFramework "org.checkerframework:checker:${checkerFrameworkVersion}"
     compile "org.checkerframework:checker-qual:${checkerFrameworkVersion}"
 
-    // JUnit Jupiter API and TestEngine implementation
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-
-    // Only needed to run tests in an (IntelliJ) IDE(A) that bundles an older version
-    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+    testCompile 'junit:junit:4.12'
 }
-
-junitPlatform {
-    reportsDir file('build/test-results/test')
-}
-junitPlatform.finalizedBy jacocoTestReport
 
 tasks.withType(JavaCompile).all { JavaCompile compile ->
     compile.options.compilerArgs = [
@@ -78,12 +56,3 @@ tasks.withType(JavaCompile).all { JavaCompile compile ->
     options.fork = true
     options.forkOptions.jvmArgs += ["-Xbootclasspath/p:${configurations.checkerFrameworkJavac.asPath}"]
 }
-
-
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-        html.enabled = false
-    }
-}
-check.dependsOn jacocoTestReport

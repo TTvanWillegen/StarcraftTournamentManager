@@ -29,7 +29,8 @@ checkstyle {
     showViolations = true
     ignoreFailures = false
     toolVersion = '8.2'
-    //TODO: Add maxWarnings and maxErrors
+    maxWarnings = 0
+    maxErrors = 0
 }
 jacocoTestReport {
     reports {

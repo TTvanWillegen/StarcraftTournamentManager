@@ -1,71 +1,85 @@
 package objects;
 
-import exceptions.OrderNotDefinedException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import objects.auxiliary.CircularLinkedList;
+import objects.auxiliary.PeekableIterator;
+import objects.match.Match;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
- * A Round object contains multiple {@link Poule}s, aswell as an {@link Order} to traverse them in.
+ * A Round object contains one or multiple {@link Poule}s
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
  */
 public class Round {
-    private List<Poule> pouleList = new ArrayList<>();
-    private Random random = new Random();
-    private Order pouleOrder;
+	@NonNull
+	private CircularLinkedList<Poule> pouleList;
+	private PeekableIterator<Poule> pouleIterator;
 
-    public Round(Order pouleOrder) {
-        this.pouleOrder = pouleOrder;
-    }
+	public Round() {
+		pouleList = new CircularLinkedList<>();
+		pouleIterator = pouleList.getIterator();
+	}
 
-    public Round(Order pouleOrder, List<Poule> pouleList) {
-        this(pouleOrder);
-        this.pouleList = pouleList;
-    }
+	public Round(List<Poule> pouleList) {
+		this();
+		this.pouleList.addAll(pouleList);
+	}
 
-    /**
-     * Returns the next {@link Poule} in the sequence, based on the
-     * {@link objects.Order} that is provided.
-     *
-     * @return Next {@link objects.Poule} in line as defined by the {@link objects.Order}
-     * @throws OrderNotDefinedException Throws this exception when there is no {@link
-     *                                  objects.Order}
-     *                                  defined in the Poule
-     */
-    public Poule getNextPoule() throws OrderNotDefinedException {
-        switch (pouleOrder) {
-            case LINEAR:
-                return getNextLinearPoule();
-            case RANDOM:
-                return getNextRandomPoule();
-            default:
-                throw new OrderNotDefinedException();
-        }
+	/**
+	 * Returns the next {@link Poule} in the sequence.
+	 */
+	public Poule getNextPoule() {
+		return pouleIterator.next();
+	}
 
-    }
+	/**
+	 * Checks if there is a next {@link Poule} in the sequence.
+	 */
+	public boolean hasNextPoule() {
+		return pouleIterator.hasNext();
+	}
 
-    /**
-     * Removes a {@link objects.Poule} from the list and returns *true* if
-     * it is
-     * removed.
-     *
-     * @param pouleToRemove The {@link objects.Poule} to remove from the {@link objects.Poule}
-     * @return (boolean) *True* if removed, *False* if not.
-     */
-    public boolean removePoule(Poule pouleToRemove) {
-        return pouleList.remove(pouleToRemove);
-    }
+	/**
+	 * Returns the next {@link Match} in the sequence.
+	 */
+	public Match getNextMatch() throws IndexOutOfBoundsException {
+		return pouleIterator.next().getNextMatch();
+	}
 
-    public void addPoule(Poule pouleToAdd) {
-        pouleList.add(pouleToAdd);
-    }
+	/**
+	 * Peeks the next {@link Match} in the sequence.
+	 */
+	public Match peekNextMatch() throws IndexOutOfBoundsException {
+		return pouleIterator.peek().peekNextMatch();
+	}
 
-    private Poule getNextRandomPoule() {
-        return pouleList.get(random.nextInt(pouleList.size()));
-    }
+	/**
+	 * Checks if there is a next {@link Match} in the sequence.
+	 */
+	public boolean hasNextMatch() {
+		return pouleIterator.hasNext() && pouleIterator.peek().hasNextMatch();
+	}
 
-    private Poule getNextLinearPoule() {
-        return pouleList.get(0);
-    }
+	/**
+	 * Removes a {@link objects.Poule} from the list and returns *true* if
+	 * it is removed.
+	 *
+	 * @param pouleToRemove
+	 * 	The {@link objects.Poule} to remove from the {@link objects.Poule}
+	 * @return (boolean) *True* if removed, *False* if not.
+	 */
+	public boolean removePoule(Poule pouleToRemove) {
+		return pouleList.remove(pouleToRemove);
+	}
+
+	public void addPoules(List<Poule> pouleToAdd) {
+		pouleList.addAll(pouleToAdd);
+	}
+
+	public void addPoule(Poule pouleToAdd) {
+		pouleList.add(pouleToAdd);
+	}
+
 }

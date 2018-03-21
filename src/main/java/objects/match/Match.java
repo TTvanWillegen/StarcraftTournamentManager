@@ -18,15 +18,14 @@ public class Match {
     private List<Team> teams;
     @NonNull
     private MatchState matchState;
-    @NonNull
-    private MatchResult matchResult;
+    @Nullable
+    private MatchResult matchResult = null;
     @NonNull
     private Map map;
 
     /**
      * Creates a {@link Match} object, containing a {@link List} of teams competing and a
-     * {@link Map} object on which the {@link Match} is played. Sets the {@link MatchState} to
-     * *IN_LINE* and the {@link MatchResult} to a new empty result.
+     * {@link Map} object on which the {@link Match} is played.
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -34,7 +33,6 @@ public class Match {
     public Match(@NonNull List<Team> teams, @NonNull Map map) {
         this.teams = teams;
         this.matchState = MatchState.IN_LINE;
-        this.matchResult = MatchResultFactory.getInstance().newResult(teams);
         this.map = map;
     }
 

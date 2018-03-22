@@ -1,8 +1,8 @@
 package objects;
 
-import static junit.framework.TestCase.assertTrue;
-
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * @author Toby T. van Willegen

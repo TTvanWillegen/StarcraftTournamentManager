@@ -11,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A Round object contains one or multiple {@link Poule}s
+ * A Round object contains one or multiple {@link Pool}s
  *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
@@ -20,29 +20,29 @@ public class Round {
 	@Nullable
 	private Round nextRound = null;
 	@NonNull
-	private CircularLinkedList<Poule> pouleList;
+	private CircularLinkedList<Pool> pouleList;
 	@NonNull
-	private PeekableIterator<Poule> pouleIterator;
+	private PeekableIterator<Pool> pouleIterator;
 
 	public Round() {
 		pouleList = new CircularLinkedList<>();
 		pouleIterator = pouleList.getIterator();
 	}
 
-	public Round(List<Poule> pouleList) {
+	public Round(List<Pool> poolList) {
 		this();
-		this.pouleList.addAll(pouleList);
+		this.pouleList.addAll(poolList);
 	}
 
 	/**
-	 * Returns the next {@link Poule} in the sequence.
+	 * Returns the next {@link Pool} in the sequence.
 	 */
-	public Poule getNextPoule() {
+	public Pool getNextPoule() {
 		return pouleIterator.next();
 	}
 
 	/**
-	 * Checks if there is a next {@link Poule} in the sequence.
+	 * Checks if there is a next {@link Pool} in the sequence.
 	 */
 	public boolean hasNextPoule() {
 		return pouleIterator.hasNext();
@@ -70,12 +70,12 @@ public class Round {
 	}
 
 	public Collection<Team> getTeams() {
-		Poule startingPoule = pouleIterator.next();
-		HashSet<Team> teamList = new HashSet<>(startingPoule.getTeamList());
+		Pool startingPool = pouleIterator.next();
+		HashSet<Team> teamList = new HashSet<>(startingPool.getTeamList());
 
-		while (!pouleIterator.peek().equals(startingPoule)) {
-			Poule poule = pouleIterator.next();
-			teamList.addAll(poule.getTeamList());
+		while (!pouleIterator.peek().equals(startingPool)) {
+			Pool pool = pouleIterator.next();
+			teamList.addAll(pool.getTeamList());
 		}
 		return teamList;
 	}
@@ -86,23 +86,23 @@ public class Round {
 	}
 
 	/**
-	 * Removes a {@link objects.Poule} from the list and returns *true* if
+	 * Removes a {@link Pool} from the list and returns *true* if
 	 * it is removed.
 	 *
-	 * @param pouleToRemove
-	 * 	The {@link objects.Poule} to remove from the {@link objects.Poule}
+	 * @param poolToRemove
+	 * 	The {@link Pool} to remove from the {@link Pool}
 	 * @return (boolean) *True* if removed, *False* if not.
 	 */
-	public boolean removePoule(Poule pouleToRemove) {
-		return pouleList.remove(pouleToRemove);
+	public boolean removePoule(Pool poolToRemove) {
+		return pouleList.remove(poolToRemove);
 	}
 
-	public void addPoules(List<Poule> pouleToAdd) {
-		pouleList.addAll(pouleToAdd);
+	public void addPoules(List<Pool> poolToAdd) {
+		pouleList.addAll(poolToAdd);
 	}
 
-	public void addPoule(Poule pouleToAdd) {
-		pouleList.add(pouleToAdd);
+	public void addPoule(Pool poolToAdd) {
+		pouleList.add(poolToAdd);
 	}
 
 	@Nullable

@@ -12,25 +12,25 @@ import objects.team.Team;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
- * A Poule object contains multiple {@link Match}es aswell as an
+ * A Pool object contains multiple {@link Match}es aswell as an
  * {@link Order} in which to
  * traverse the {@link Match}es.
  *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
  */
-public class Poule {
+public class Pool {
 	private Collection<Team> teamList;
 	private MatchList matchList;
 	private PeekableIterator<Match> matchIterator;
 
-	public Poule(@NonNull Order matchOrder) {
+	public Pool(@NonNull Order matchOrder) {
 		this.matchList = new MatchList(matchOrder);
 		this.matchIterator = matchList.iterator();
 		this.teamList = new ArrayList<>();
 	}
 
-	public Poule(@NonNull Order matchOrder, @NonNull List<Team> teams) {
+	public Pool(@NonNull Order matchOrder, @NonNull List<Team> teams) {
 		this(matchOrder);
 		this.teamList = teams;
 	}
@@ -80,7 +80,7 @@ public class Poule {
 	 * removed.
 	 *
 	 * @param matchToRemove
-	 * 	The {@link Match} to remove from the {@link objects.Poule}
+	 * 	The {@link Match} to remove from the {@link Pool}
 	 * @return (boolean) *True* iff removed, *False* if not.
 	 */
 	public boolean removeMatch(Match matchToRemove) {
@@ -99,10 +99,10 @@ public class Poule {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Poule poule = (Poule) o;
-		return Objects.equals(teamList, poule.teamList) &&
-			Objects.equals(matchList, poule.matchList) &&
-			Objects.equals(matchIterator, poule.matchIterator);
+		Pool pool = (Pool) o;
+		return Objects.equals(teamList, pool.teamList) &&
+			Objects.equals(matchList, pool.matchList) &&
+			Objects.equals(matchIterator, pool.matchIterator);
 	}
 
 	@Override

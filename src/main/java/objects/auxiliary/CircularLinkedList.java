@@ -21,7 +21,10 @@ public class CircularLinkedList<T> {
 			Element<T> nextElement = this.head.getNextElement();
 			Element<T> newElement = new Element<>(element);
 			newElement.setNextElement(nextElement);
-			this.head.setNextElement(newElement);
+			if(this.head != null) { // make sure that this.head.getNextElement
+				// didn't change head to null
+				this.head.setNextElement(newElement);
+			}
 		} else {
 			head = new Element<>(element);
 			head.setNextElement(head);

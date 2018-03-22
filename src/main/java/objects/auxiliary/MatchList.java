@@ -11,6 +11,10 @@ import objects.match.Match;
 public class MatchList extends ArrayList<Match> {
 	private Order order;
 
+	public MatchList(Order order) {
+		this.order = order;
+	}
+
 	@Override
 	public PeekableIterator<Match> iterator() {
 		return new PeekableIterator<Match>() {
@@ -23,12 +27,15 @@ public class MatchList extends ArrayList<Match> {
 
 			@Override
 			public Match next() {
+				//TODO: Implement the order in this method.
+				//TODO: Make sure a list can be generated from this.
 				Match next = get(currentIndex);
 				currentIndex++;
 				return next;
 			}
 
 			public Match peek() {
+				//TODO: Implement the order in this method.
 				return get(currentIndex + 1);
 			}
 		};

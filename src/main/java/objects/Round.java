@@ -1,10 +1,14 @@
 package objects;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import objects.auxiliary.CircularLinkedList;
 import objects.auxiliary.PeekableIterator;
 import objects.match.Match;
+import objects.team.Team;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A Round object contains one or multiple {@link Poule}s
@@ -13,8 +17,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @version 1.1, 2017-06-13.
  */
 public class Round {
+	@Nullable
+	private Round nextRound = null;
 	@NonNull
 	private CircularLinkedList<Poule> pouleList;
+	@NonNull
 	private PeekableIterator<Poule> pouleIterator;
 
 	public Round() {
@@ -62,6 +69,17 @@ public class Round {
 		return pouleIterator.hasNext() && pouleIterator.peek().hasNextMatch();
 	}
 
+	public Collection<Team> getTeams() {
+		Poule startingPoule = pouleIterator.next();
+		HashSet<Team> teamList = new HashSet<>(startingPoule.getTeamList());
+
+		while (!pouleIterator.peek().equals(startingPoule)) {
+			Poule poule = pouleIterator.next();
+			teamList.addAll(poule.getTeamList());
+		}
+		return teamList;
+	}
+
 	/**
 	 * Removes a {@link objects.Poule} from the list and returns *true* if
 	 * it is removed.
@@ -82,4 +100,12 @@ public class Round {
 		pouleList.add(pouleToAdd);
 	}
 
+	@Nullable
+	public Round getNextRound() {
+		return this.nextRound;
+	}
+
+	public void setNextRound(Round round) {
+		this.nextRound = round;
+	}
 }

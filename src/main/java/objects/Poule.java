@@ -1,11 +1,9 @@
 package objects;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.Collection;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
+import java.util.Objects;
 import objects.auxiliary.MatchList;
 import objects.auxiliary.PeekableIterator;
 import objects.match.Match;
@@ -22,18 +20,27 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @version 1.1, 2017-06-13.
  */
 public class Poule {
-	private List<Team> teamList = new ArrayList<>();
-	private MatchList matchList = new MatchList();
-	private PeekableIterator<Match> matchIterator = matchList.iterator();
-	private Order matchOrder;
+	private Collection<Team> teamList;
+	private MatchList matchList;
+	private PeekableIterator<Match> matchIterator;
 
 	public Poule(@NonNull Order matchOrder) {
-		this.matchOrder = matchOrder;
+		this.matchList = new MatchList(matchOrder);
+		this.matchIterator = matchList.iterator();
+		this.teamList = new ArrayList<>();
 	}
 
 	public Poule(@NonNull Order matchOrder, @NonNull List<Team> teams) {
 		this(matchOrder);
 		this.teamList = teams;
+	}
+
+	public boolean addTeam(Team team) {
+		return teamList.contains(team) || this.teamList.add(team);
+	}
+
+	public Collection<Team> getTeamList() {
+		return this.teamList;
 	}
 
 	/**
@@ -80,10 +87,27 @@ public class Poule {
 		return matchList.remove(matchToRemove);
 	}
 
-	public void addMatch(List<Match> matchesToAdd) {
-		if (this.matchOrder == Order.RANDOM) {
-			Collections.shuffle(matchesToAdd);
-		}
+	public void addMatches(List<Match> matchesToAdd) {
 		matchList.addAll(matchesToAdd);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Poule poule = (Poule) o;
+		return Objects.equals(teamList, poule.teamList) &&
+			Objects.equals(matchList, poule.matchList) &&
+			Objects.equals(matchIterator, poule.matchIterator);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(teamList, matchList, matchIterator);
 	}
 }

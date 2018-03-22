@@ -1,15 +1,35 @@
 package objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Toby T. van Willegen
  * @version 1.1, 2018-03-21.
  */
 public class Game {
-	List<Round> rounds = new ArrayList<>();
-	public Game(){}
+	@NonNull
+	private Round startingRound;
 
+	public Game() {
+		startingRound = new Round();
+	}
 
+	public Game(Round round) {
+		this.startingRound = round;
+	}
+
+	//TODO: make sure that the round has a way to get the top X
+	// teams to pass through.
+	public void addRound(@NonNull Round round) {
+		getLastRound().setNextRound(round);
+	}
+
+	@NonNull
+	private Round getLastRound() {
+		Round round = startingRound;
+		while (round.getNextRound() != null) {
+			round = round.getNextRound();
+		}
+		return round;
+	}
 }

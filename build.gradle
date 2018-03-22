@@ -1,14 +1,66 @@
 group 'nl.tobyvanwillegen'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
 
+apply plugin: 'java'
+apply plugin: 'checkstyle'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+configurations {
+    checkerFrameworkJavac {
+        description = 'a customization of the Open JDK javac compiler with additional support for type annotations'
+    }
+    checkerFrameworkAnnotatedJDK {
+        description = 'a copy of JDK classes with Checker Framework type qualifers inserted'
+    }
+    checkerFramework {
+        description = 'The Checker Framework: custom pluggable types for Java'
+    }
+}
+checkstyle {
+    configFile rootProject.file('GoogleChecks.xml')
+    showViolations = true
+    ignoreFailures = false
+    toolVersion = '8.2'
+    //TODO: Add maxWarnings and maxErrors
+}
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
 dependencies {
+    //Checker
+    ext.checkerFrameworkVersion = '2.2.0'
+    ext.jdkVersion = 'jdk8'
+    checkerFrameworkAnnotatedJDK "org.checkerframework:${jdkVersion}:${checkerFrameworkVersion}"
+    checkerFrameworkJavac "org.checkerframework:compiler:${checkerFrameworkVersion}"
+    checkerFramework "org.checkerframework:checker:${checkerFrameworkVersion}"
+    compile "org.checkerframework:checker-qual:${checkerFrameworkVersion}"
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+tasks.withType(JavaCompile).all { JavaCompile compile ->
+    compile.options.compilerArgs = [
+            '-processor', 'org.checkerframework.checker.nullness.NullnessChecker',
+            '-processorpath', "${configurations.checkerFramework.asPath}",
+            // uncomment to turn Checker Framework errors into warnings
+            //'-Awarns',
+            "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
+            '-source', '8', '-target', '8'
+    ]
+    options.fork = true
+    options.forkOptions.jvmArgs += ["-Xbootclasspath/p:${configurations.checkerFrameworkJavac.asPath}"]
+}
+
+check.dependsOn jacocoTestReport

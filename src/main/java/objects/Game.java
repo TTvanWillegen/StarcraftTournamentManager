@@ -18,7 +18,6 @@ public class Game {
 		this.startingRound = round;
 	}
 
-	//TODO: make sure that the round has a way to get the top X
 	// teams to pass through.
 	public void addRound(@NonNull Round round) {
 		getLastRound().setNextRound(round);

@@ -80,6 +80,10 @@ public class Round {
 		return teamList;
 	}
 
+	public Collection<Team> getTopTeams(int topN) {
+		//TODO: make sure that the round has a way to get the top X
+	}
+
 	/**
 	 * Removes a {@link objects.Poule} from the list and returns *true* if
 	 * it is removed.

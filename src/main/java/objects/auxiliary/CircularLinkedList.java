@@ -1,6 +1,7 @@
 package objects.auxiliary;
 
 import java.util.Collection;
+import java.util.Objects;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -11,7 +12,6 @@ public class CircularLinkedList<T> {
 	private Element<T> head = null;
 
 	public CircularLinkedList() {
-		super();
 	}
 
 	public void add(T element) {
@@ -61,6 +61,25 @@ public class CircularLinkedList<T> {
 		return new PeekableCircularIterator<>(head);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		CircularLinkedList<?> that = (CircularLinkedList<?>) o;
+		return this.head == null && that.head == null ||
+			(this.head != null && this.head.equals(that.head));
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(head);
+	}
+
 	private class PeekableCircularIterator<A> implements PeekableIterator<A> {
 		private Element<A> currentElement;
 
@@ -91,4 +110,5 @@ public class CircularLinkedList<T> {
 			return currentElement.getNextElement().getElement();
 		}
 	}
+
 }

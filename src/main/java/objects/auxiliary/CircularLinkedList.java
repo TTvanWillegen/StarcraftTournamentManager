@@ -16,24 +16,28 @@ public class CircularLinkedList<T> {
     @Nullable
     private Element<T> head = null;
 
-    /** Adds an element to this CLL.
+    /**
+     * Adds an element to this CLL.
      *
      * @param element The element to add
      */
     public void add(@NonNull T element) {
+        Element<T> newElement = new Element<>(element);
         if (this.head != null) {
             Element<T> nextElement = this.head.getNextElement();
-            Element<T> newElement = new Element<>(element);
             newElement.setNextElement(nextElement);
-
+        }
+        if (this.head != null) {
             this.head.setNextElement(newElement);
-        } else {
+        }
+        if (this.head == null) {
             head = new Element<>(element);
             head.setNextElement(head);
         }
     }
 
-    /** Adds all of the elements in provided collection to this Circularly Linked List.
+    /**
+     * Adds all of the elements in provided collection to this Circularly Linked List.
      *
      * @param elements A {@link Collection} to add to this CLL
      */
@@ -43,10 +47,12 @@ public class CircularLinkedList<T> {
         }
     }
 
-    /** Returns the element at provided index.
-     *      Note: Is circular, so index > size will result in the same element as index % size
+    /**
+     * Returns the element at provided index. Note: Is circular, so index > size will result in the
+     * same element as index % size
+     *
      * @param index The index to search for.
-     * @return  (T) Element at index % size.
+     * @return (T) Element at index % size.
      * @throws IndexOutOfBoundsException If there are no elements in this list, or index < 0
      */
     public T get(@NonNull int index) throws IndexOutOfBoundsException {

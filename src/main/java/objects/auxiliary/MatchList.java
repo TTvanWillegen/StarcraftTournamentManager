@@ -8,6 +8,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Stores the Matches of a Pool together with an order.
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2018-03-21.
  */

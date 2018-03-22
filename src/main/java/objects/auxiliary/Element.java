@@ -7,6 +7,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * An Element as used in the Circularly Linked List.
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2018-03-21.
  */
@@ -31,6 +32,7 @@ public class Element<A> {
 
     /**
      * Returns the next element.
+     *
      * @return The next Element in this CLL.
      */
     @NonNull

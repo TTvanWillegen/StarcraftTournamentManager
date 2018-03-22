@@ -1,174 +1,176 @@
 package objects.auxiliary;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import org.junit.Test;
+
 /**
+ * Tests for the {@link CircularLinkedList} class.
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2018-03-22.
  */
 public class CircularLinkedListTest {
     @Test
     public void testEqualsOnlyHead() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String string = "A";
-        stringCLL1.add(string);
-        stringCLL2.add(string);
-        assertEquals(stringCLL1, stringCLL2);
+        stringCll1.add(string);
+        stringCll2.add(string);
+        assertEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testEqualsTwoItems() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringA = "A";
         String stringB = "B";
-        stringCLL1.add(stringA);
-        stringCLL2.add(stringA);
-        stringCLL1.add(stringB);
-        stringCLL2.add(stringB);
-        assertEquals(stringCLL1, stringCLL2);
+        stringCll1.add(stringA);
+        stringCll2.add(stringA);
+        stringCll1.add(stringB);
+        stringCll2.add(stringB);
+        assertEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testEqualsManyItems() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringA = "A";
+        stringCll1.add(stringA);
+        stringCll2.add(stringA);
         String stringB = "B";
+        stringCll1.add(stringB);
+        stringCll2.add(stringB);
         String stringC = "C";
+        stringCll1.add(stringC);
+        stringCll2.add(stringC);
         String stringD = "D";
+        stringCll1.add(stringD);
+        stringCll2.add(stringD);
         String stringE = "E";
+        stringCll1.add(stringE);
+        stringCll2.add(stringE);
         String stringF = "F";
+        stringCll1.add(stringF);
+        stringCll2.add(stringF);
         String stringG = "G";
+        stringCll1.add(stringG);
+        stringCll2.add(stringG);
         String stringH = "H";
-        stringCLL1.add(stringA);
-        stringCLL2.add(stringA);
-        stringCLL1.add(stringB);
-        stringCLL2.add(stringB);
-        stringCLL1.add(stringC);
-        stringCLL2.add(stringC);
-        stringCLL1.add(stringD);
-        stringCLL2.add(stringD);
-        stringCLL1.add(stringE);
-        stringCLL2.add(stringE);
-        stringCLL1.add(stringF);
-        stringCLL2.add(stringF);
-        stringCLL1.add(stringG);
-        stringCLL2.add(stringG);
-        stringCLL1.add(stringH);
-        stringCLL2.add(stringH);
-        assertEquals(stringCLL1, stringCLL2);
+        stringCll1.add(stringH);
+        stringCll2.add(stringH);
+        assertEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testNotEqualsManyItemsDiffSize() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringA = "A";
+        stringCll1.add(stringA);
+        stringCll2.add(stringA);
         String stringB = "B";
+        stringCll1.add(stringB);
+        stringCll2.add(stringB);
         String stringC = "C";
+        stringCll1.add(stringC);
+        stringCll2.add(stringC);
         String stringD = "D";
+        stringCll1.add(stringD);
+        stringCll2.add(stringD);
         String stringE = "E";
+        stringCll1.add(stringE);
+        stringCll2.add(stringE);
         String stringF = "F";
+        stringCll1.add(stringF);
+        stringCll2.add(stringF);
         String stringG = "G";
+        stringCll1.add(stringG);
+        stringCll2.add(stringG);
         String stringH = "H";
-        stringCLL1.add(stringA);
-        stringCLL2.add(stringA);
-        stringCLL1.add(stringB);
-        stringCLL2.add(stringB);
-        stringCLL1.add(stringC);
-        stringCLL2.add(stringC);
-        stringCLL1.add(stringD);
-        stringCLL2.add(stringD);
-        stringCLL1.add(stringE);
-        stringCLL2.add(stringE);
-        stringCLL1.add(stringF);
-        stringCLL2.add(stringF);
-        stringCLL1.add(stringG);
-        stringCLL2.add(stringG);
-        stringCLL1.add(stringH);
-        assertNotEquals(stringCLL1, stringCLL2);
+        stringCll1.add(stringH);
+        assertNotEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testNotEqualsManyItemsDiffElem() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringA = "A";
+        stringCll1.add(stringA);
+        stringCll2.add(stringA);
         String stringB = "B";
+        stringCll1.add(stringB);
+        stringCll2.add(stringB);
         String stringC = "C";
+        stringCll1.add(stringC);
+        stringCll2.add(stringC);
         String stringD = "D";
+        stringCll1.add(stringD);
+        stringCll2.add(stringD);
         String stringE = "E";
+        stringCll1.add(stringE);
+        stringCll2.add(stringE);
         String stringF = "F";
+        stringCll1.add(stringF);
+        stringCll2.add(stringF);
         String stringG = "G";
+        stringCll1.add(stringG);
+        stringCll2.add(stringG);
         String stringH = "H";
+        stringCll1.add(stringH);
         String stringZ = "Z";
-        stringCLL1.add(stringA);
-        stringCLL2.add(stringA);
-        stringCLL1.add(stringB);
-        stringCLL2.add(stringB);
-        stringCLL1.add(stringC);
-        stringCLL2.add(stringC);
-        stringCLL1.add(stringD);
-        stringCLL2.add(stringD);
-        stringCLL1.add(stringE);
-        stringCLL2.add(stringE);
-        stringCLL1.add(stringF);
-        stringCLL2.add(stringF);
-        stringCLL1.add(stringG);
-        stringCLL2.add(stringG);
-        stringCLL1.add(stringH);
-        stringCLL2.add(stringZ);
-        assertNotEquals(stringCLL1, stringCLL2);
+        stringCll2.add(stringZ);
+        assertNotEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testEqualsEmpty() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
-        assertEquals(stringCLL1, stringCLL2);
+        assertEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testNotEqualsDifferentSize() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringA = "A";
         String stringB = "B";
-        stringCLL1.add(stringA);
-        stringCLL2.add(stringA);
-        stringCLL1.add(stringB);
-        assertNotEquals(stringCLL1, stringCLL2);
+        stringCll1.add(stringA);
+        stringCll2.add(stringA);
+        stringCll1.add(stringB);
+        assertNotEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testNotEqualsDifferentSize1Empty() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringA = "A";
-        stringCLL2.add(stringA);
-        assertNotEquals(stringCLL1, stringCLL2);
+        stringCll2.add(stringA);
+        assertNotEquals(stringCll1, stringCll2);
     }
 
     @Test
     public void testNotEqualsDifferentSize2Empty() {
-        CircularLinkedList<String> stringCLL1 = new CircularLinkedList<>();
-        CircularLinkedList<String> stringCLL2 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll1 = new CircularLinkedList<>();
+        CircularLinkedList<String> stringCll2 = new CircularLinkedList<>();
 
         String stringB = "B";
-        stringCLL1.add(stringB);
-        assertNotEquals(stringCLL1, stringCLL2);
+        stringCll1.add(stringB);
+        assertNotEquals(stringCll1, stringCll2);
     }
 }

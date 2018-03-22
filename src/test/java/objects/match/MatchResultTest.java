@@ -1,15 +1,17 @@
 package objects.match;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 
 import objects.team.Team;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-
 
 /**
+ * Tests for the {@link MatchResult} class.
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2018-03-21.
  */

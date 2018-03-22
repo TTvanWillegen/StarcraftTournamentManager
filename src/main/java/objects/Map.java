@@ -26,10 +26,11 @@ public class Map {
         this.maxAmountOfTeams = maxAmountOfTeams;
     }
 
-    public void useFile(File file) {
+    public void useFile(@NonNull File file) {
         this.mapFile = file;
     }
 
+    @Nullable
     public File getMapFile() {
         return this.mapFile;
     }

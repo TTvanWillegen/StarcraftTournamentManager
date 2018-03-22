@@ -9,8 +9,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Match object, contains the teams playing a match, the match state, the map
- * it is played on and
+ * Match object, contains the teams playing a match, the match state, the map it is played on and
  * the result once played.
  *
  * @author Toby T. van Willegen
@@ -27,9 +26,8 @@ public class Match {
     private Map map;
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams
-     * competing and a
-     * {@link Map} object on which the {@link Match} is played.
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played.
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -41,18 +39,13 @@ public class Match {
     }
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams
-     * competing and a
-     * {@link Map} object on which the {@link Match} is played. Provided
-     * {@link MatchState}
-     * will be added to the {@link Match} aswell. Sets the
-     * {@link MatchResult} to a new empty
-     * result.
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played. Provided {@link MatchState} will be added
+     * to the {@link Match} aswell. Sets the {@link MatchResult} to a new empty result.
      *
      * @param teams      {@link List} The {@link Team}s that are playing
      * @param map        {@link Map} The {@link Map} on which the {@link Match} is played.
-     * @param matchState {@link MatchState} The {@link MatchState} which the {@link Match}
-     *                   should
+     * @param matchState {@link MatchState} The {@link MatchState} which the {@link Match} should
      *                   have.
      */
     public Match(@NonNull List<Team> teams, @NonNull Map map,
@@ -62,11 +55,9 @@ public class Match {
     }
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams
-     * competing and a
-     * {@link Map} object on which the {@link Match} is played. Uses provided
-     * {@link MatchResult} for the {@link Match}. Sets the {@link MatchState}
-     * to *IN_LINE*.
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played. Uses provided {@link MatchResult} for the
+     * {@link Match}. Sets the {@link MatchState} to *IN_LINE*.
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -78,11 +69,9 @@ public class Match {
     }
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams
-     * competing and a
-     * {@link Map} object on which the {@link Match} is played. Uses provided
-     * {@link MatchResult} for the {@link Match}, aswell as the provided
-     * {@link MatchState}
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played. Uses provided {@link MatchResult} for the
+     * {@link Match}, aswell as the provided {@link MatchState}
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -98,8 +87,7 @@ public class Match {
     /**
      * Returns *True* iff the {@link Match} is still in line to be played.
      *
-     * @return {@link boolean} *True* iff the {@link Match} is still in line,
-     *     *False* otherwise.
+     * @return {@link boolean} *True* iff the {@link Match} is still in line, *False* otherwise.
      */
     public boolean hasToBePlayed() {
         return matchState == MatchState.IN_LINE;

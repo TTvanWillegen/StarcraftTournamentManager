@@ -14,9 +14,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A Pool object contains multiple {@link Match}es aswell as an
- * {@link Order} in which to
- * traverse the {@link Match}es.
+ * A Pool object contains multiple {@link Match}es aswell as an {@link Order} in which to traverse
+ * the {@link Match}es.
  *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
@@ -56,8 +55,7 @@ public class Pool {
     /**
      * Returns the next {@link Match} in the sequence.
      *
-     * @return Next {@link Match} in line as defined by the
-     *     {@link objects.Order}, will always be a
+     * @return Next {@link Match} in line as defined by the {@link objects.Order}, will always be a
      *     {@link Match} with {@link MatchState#IN_LINE}
      */
     public Match getNextMatch() {
@@ -67,8 +65,7 @@ public class Pool {
     /**
      * Peeks the next {@link Match} in the sequence.
      *
-     * @return Next {@link Match} in line as defined by the
-     *     {@link objects.Order}, will always be a
+     * @return Next {@link Match} in line as defined by the {@link objects.Order}, will always be a
      *     {@link Match} with {@link MatchState#IN_LINE}
      */
     public Match peekNextMatch() {
@@ -78,16 +75,14 @@ public class Pool {
     /**
      * Checks if there is a next {@link Match} in the sequence.
      *
-     * @return *True* iff there is a next {@link Match} in line, *False*
-     *     otherwise
+     * @return *True* iff there is a next {@link Match} in line, *False* otherwise
      */
     public boolean hasNextMatch() {
         return matchIterator.hasNext();
     }
 
     /**
-     * Removes a {@link Match} from the list and returns *True* if it is
-     * removed.
+     * Removes a {@link Match} from the list and returns *True* if it is removed.
      *
      * @param matchToRemove The {@link Match} to remove from the {@link Pool}
      * @return (boolean) *True* iff removed, *False* if not.

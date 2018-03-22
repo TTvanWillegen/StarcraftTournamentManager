@@ -57,6 +57,7 @@ tasks.withType(JavaCompile).all { JavaCompile compile ->
             '-processorpath', "${configurations.checkerFramework.asPath}",
             // uncomment to turn Checker Framework errors into warnings
             //'-Awarns',
+            '-AskipUses=junit.|org.junit.',
             "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
             '-source', '8', '-target', '8'
     ]

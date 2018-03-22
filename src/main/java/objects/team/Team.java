@@ -6,8 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A Team object contains a TeamName, aswell as a {@link TeamRace}, amount of
- * games played and
+ * A Team object contains a TeamName, aswell as a {@link TeamRace}, amount of games played and
  * amount of games won.
  *
  * @author Toby T. van Willegen
@@ -20,9 +19,8 @@ public class Team {
     private TeamRace teamRace;
 
     /**
-     * Generates a {@link Team} object with provided name and
-     * {@link TeamRace}. Sets wins and
-     * plays to 0.
+     * Generates a {@link Team} object with provided name and {@link TeamRace}. Sets wins and plays
+     * to 0.
      *
      * @param name     {@link String}The name the team gets.
      * @param teamRace {@link TeamRace} The race the team gets.

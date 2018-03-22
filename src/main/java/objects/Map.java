@@ -20,7 +20,7 @@ public class Map {
     @NonNull
     private int maxAmountOfTeams;
 
-    public Map(String mapName, int maxAmountOfTeams) {
+    public Map(@NonNull String mapName, @NonNull int maxAmountOfTeams) {
         this.mapName = mapName;
         this.maxAmountOfTeams = maxAmountOfTeams;
     }

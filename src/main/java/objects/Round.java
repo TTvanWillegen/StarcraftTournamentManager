@@ -29,7 +29,7 @@ public class Round {
 		pouleIterator = pouleList.getIterator();
 	}
 
-	public Round(List<Pool> poolList) {
+	public Round(@NonNull List<Pool> poolList) {
 		this();
 		this.pouleList.addAll(poolList);
 	}
@@ -80,7 +80,7 @@ public class Round {
 		return teamList;
 	}
 
-	public Collection<Team> getTopTeams(int topN) {
+	public Collection<Team> getTopTeams(@NonNull int topN) {
 		//TODO: make sure that the round has a way to get the top X
 		return new HashSet<>();
 	}
@@ -93,15 +93,15 @@ public class Round {
 	 * 	The {@link Pool} to remove from the {@link Pool}
 	 * @return (boolean) *True* if removed, *False* if not.
 	 */
-	public boolean removePoule(Pool poolToRemove) {
+	public boolean removePoule(@NonNull Pool poolToRemove) {
 		return pouleList.remove(poolToRemove);
 	}
 
-	public void addPoules(List<Pool> poolToAdd) {
+	public void addPoules(@NonNull List<@NonNull Pool> poolToAdd) {
 		pouleList.addAll(poolToAdd);
 	}
 
-	public void addPoule(Pool poolToAdd) {
+	public void addPoule(@NonNull Pool poolToAdd) {
 		pouleList.add(poolToAdd);
 	}
 
@@ -110,7 +110,7 @@ public class Round {
 		return this.nextRound;
 	}
 
-	public void setNextRound(Round round) {
+	public void setNextRound(@Nullable Round round) {
 		this.nextRound = round;
 	}
 }

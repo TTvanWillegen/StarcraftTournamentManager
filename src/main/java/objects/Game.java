@@ -7,14 +7,13 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @version 1.1, 2018-03-21.
  */
 public class Game {
-	@NonNull
-	private Round startingRound;
+	@NonNull private Round startingRound;
 
 	public Game() {
 		startingRound = new Round();
 	}
 
-	public Game(Round round) {
+	public Game(@NonNull Round round) {
 		this.startingRound = round;
 	}
 
@@ -25,7 +24,7 @@ public class Game {
 
 	@NonNull
 	private Round getLastRound() {
-		Round round = startingRound;
+		@NonNull Round round = startingRound;
 		while (round.getNextRound() != null) {
 			round = round.getNextRound();
 		}

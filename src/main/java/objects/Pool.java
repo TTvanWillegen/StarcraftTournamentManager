@@ -10,6 +10,7 @@ import objects.match.Match;
 import objects.match.MatchState;
 import objects.team.Team;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A Pool object contains multiple {@link Match}es aswell as an
@@ -20,9 +21,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @version 1.1, 2017-06-13.
  */
 public class Pool {
-	private Collection<Team> teamList;
-	private MatchList matchList;
-	private PeekableIterator<Match> matchIterator;
+	@NonNull private Collection<Team> teamList;
+	@NonNull private MatchList matchList;
+	@NonNull private PeekableIterator<Match> matchIterator;
 
 	public Pool(@NonNull Order matchOrder) {
 		this.matchList = new MatchList(matchOrder);
@@ -35,7 +36,7 @@ public class Pool {
 		this.teamList = teams;
 	}
 
-	public boolean addTeam(Team team) {
+	public boolean addTeam(@NonNull Team team) {
 		return teamList.contains(team) || this.teamList.add(team);
 	}
 
@@ -83,16 +84,16 @@ public class Pool {
 	 * 	The {@link Match} to remove from the {@link Pool}
 	 * @return (boolean) *True* iff removed, *False* if not.
 	 */
-	public boolean removeMatch(Match matchToRemove) {
+	public boolean removeMatch(@NonNull Match matchToRemove) {
 		return matchList.remove(matchToRemove);
 	}
 
-	public void addMatches(List<Match> matchesToAdd) {
+	public void addMatches(@NonNull List<@NonNull Match> matchesToAdd) {
 		matchList.addAll(matchesToAdd);
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(@Nullable Object o) {
 		if (this == o) {
 			return true;
 		}

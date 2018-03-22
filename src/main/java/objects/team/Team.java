@@ -2,6 +2,7 @@ package objects.team;
 
 import java.util.Objects;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A Team object contains a TeamName, aswell as a {@link TeamRace}, amount of
@@ -44,7 +45,7 @@ public class Team {
 
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(@Nullable Object o) {
 		if (this == o) {
 			return true;
 		}

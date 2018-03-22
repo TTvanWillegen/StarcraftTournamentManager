@@ -3,6 +3,7 @@ package objects.auxiliary;
 import java.util.ArrayList;
 import objects.Order;
 import objects.match.Match;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Toby T. van Willegen
@@ -11,7 +12,7 @@ import objects.match.Match;
 public class MatchList extends ArrayList<Match> {
 	private Order order;
 
-	public MatchList(Order order) {
+	public MatchList(@NonNull Order order) {
 		this.order = order;
 	}
 

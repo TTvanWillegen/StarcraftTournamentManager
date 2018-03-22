@@ -2,37 +2,39 @@ package objects.auxiliary;
 
 import java.util.Collection;
 import java.util.Objects;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * @author Toby T. van Willegen
  * @version 1.1, 2018-03-21.
  */
 public class CircularLinkedList<T> {
+	@Nullable
 	private Element<T> head = null;
 
 	public CircularLinkedList() {
 	}
 
-	public void add(T element) {
-		if (head == null) {
-			head = new Element<>(element);
-			head.setNextElement(head);
-		} else {
-			Element<T> nextElement = head.getNextElement();
+	public void add(@NonNull T element) {
+		if (this.head != null) {
+			Element<T> nextElement = this.head.getNextElement();
 			Element<T> newElement = new Element<>(element);
 			newElement.setNextElement(nextElement);
-			head.setNextElement(newElement);
+			this.head.setNextElement(newElement);
+		} else {
+			head = new Element<>(element);
+			head.setNextElement(head);
 		}
 	}
 
-	public void addAll(Collection<T> elements) {
+	public void addAll(@NonNull Collection<@NonNull T> elements) {
 		for (T element : elements) {
 			add(element);
 		}
 	}
 
-	public T get(int index) throws IndexOutOfBoundsException {
+	public T get(@NonNull int index) throws IndexOutOfBoundsException {
 		int i = index;
 		Element<T> element = head;
 
@@ -47,14 +49,15 @@ public class CircularLinkedList<T> {
 		return element.getElement();
 	}
 
-	public boolean remove(int index) throws IndexOutOfBoundsException {
+	public boolean remove(@NonNull int index) throws
+		IndexOutOfBoundsException {
 		//TODO: add remove
-		throw new NotImplementedException();
+		return false;
 	}
 
-	public boolean remove(T element) {
+	public boolean remove(@NonNull T element) {
 		//TODO: add remove
-		throw new NotImplementedException();
+		return false;
 	}
 
 	public PeekableIterator<T> getIterator() {
@@ -62,7 +65,7 @@ public class CircularLinkedList<T> {
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(@Nullable Object o) {
 		if (this == o) {
 			return true;
 		}
@@ -81,9 +84,10 @@ public class CircularLinkedList<T> {
 	}
 
 	private class PeekableCircularIterator<A> implements PeekableIterator<A> {
+		@Nullable
 		private Element<A> currentElement;
 
-		PeekableCircularIterator(Element<A> head) {
+		PeekableCircularIterator(@Nullable Element<A> head) {
 			this.currentElement = head;
 		}
 
@@ -91,20 +95,20 @@ public class CircularLinkedList<T> {
 		@Override
 		public boolean hasNext() {
 			return currentElement != null;
-
 		}
 
 		@Override
 		public A next() throws IndexOutOfBoundsException {
-			if (!hasNext()) {
+			if (currentElement != null) {
+				currentElement = currentElement.getNextElement();
+				return currentElement.getElement();
+			} else {
 				throw new IndexOutOfBoundsException();
 			}
-			currentElement = currentElement.getNextElement();
-			return currentElement.getElement();
 		}
 
 		public A peek() throws IndexOutOfBoundsException {
-			if (!hasNext()) {
+			if (currentElement == null) {
 				throw new IndexOutOfBoundsException();
 			}
 			return currentElement.getNextElement().getElement();

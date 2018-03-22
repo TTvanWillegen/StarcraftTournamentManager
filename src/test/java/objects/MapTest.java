@@ -5,6 +5,8 @@ import static junit.framework.TestCase.assertTrue;
 import org.junit.Test;
 
 /**
+ * Tests for the {@link Map} class.
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-09-26.
  */

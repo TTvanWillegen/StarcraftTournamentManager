@@ -1,13 +1,14 @@
 package objects;
 
 import java.io.File;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 
 /**
- * Creates an object for a map, containing the name of the map, the map
- * location aswell as the maximum amount of teams that can play the map.
+ * Creates an object for a map, containing the name of the map, the map location aswell as the
+ * maximum amount of teams that can play the map.
  *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
@@ -16,13 +17,22 @@ public class Map {
     @NonNull
     private String mapName;
     @Nullable
-    private File fileName = null;
+    private File mapFile = null;
     @NonNull
     private int maxAmountOfTeams;
 
-    public Map(String mapName, int maxAmountOfTeams) {
+    public Map(@NonNull String mapName, @NonNull int maxAmountOfTeams) {
         this.mapName = mapName;
         this.maxAmountOfTeams = maxAmountOfTeams;
+    }
+
+    public void useFile(@NonNull File file) {
+        this.mapFile = file;
+    }
+
+    @Nullable
+    public File getMapFile() {
+        return this.mapFile;
     }
 
     public String getMapName() {
@@ -30,8 +40,7 @@ public class Map {
     }
 
     /**
-     * Returns the maximum amount of {@link objects.team.Team}s that can
-     * play on this {@link Map}.
+     * Returns the maximum amount of {@link objects.team.Team}s that can play on this {@link Map}.
      *
      * @return {@link int} the maximum amount of {@link objects.team.Team}s
      */
@@ -66,7 +75,7 @@ public class Map {
 
     @Override
     public String toString() {
-        return "Map{" + "mapName='" + mapName + '\'' + ", maxAmountOfTeams="
-                   + maxAmountOfTeams + '}';
+        return "Map{" + "mapName='" + mapName + '\'' + ", maxAmountOfTeams=" +
+            maxAmountOfTeams + '}';
     }
 }

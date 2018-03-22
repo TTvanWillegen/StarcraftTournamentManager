@@ -1,6 +1,8 @@
 package objects.match;
 
 import java.util.List;
+import java.util.Objects;
+
 import objects.Map;
 import objects.team.Team;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -18,15 +20,14 @@ public class Match {
     private List<Team> teams;
     @NonNull
     private MatchState matchState;
-    @NonNull
-    private MatchResult matchResult;
+    @Nullable
+    private MatchResult matchResult = null;
     @NonNull
     private Map map;
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams competing and a
-     * {@link Map} object on which the {@link Match} is played. Sets the {@link MatchState} to
-     * *IN_LINE* and the {@link MatchResult} to a new empty result.
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played.
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -34,15 +35,13 @@ public class Match {
     public Match(@NonNull List<Team> teams, @NonNull Map map) {
         this.teams = teams;
         this.matchState = MatchState.IN_LINE;
-        this.matchResult = MatchResultFactory.getInstance().newResult(teams);
         this.map = map;
     }
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams competing and a
-     * {@link Map} object on which the {@link Match} is played. Provided {@link MatchState}
-     * will be added to the {@link Match} aswell. Sets the {@link MatchResult} to a new empty
-     * result.
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played. Provided {@link MatchState} will be added
+     * to the {@link Match} aswell. Sets the {@link MatchResult} to a new empty result.
      *
      * @param teams      {@link List} The {@link Team}s that are playing
      * @param map        {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -56,9 +55,9 @@ public class Match {
     }
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams competing and a
-     * {@link Map} object on which the {@link Match} is played. Uses provided
-     * {@link MatchResult} for the {@link Match}. Sets the {@link MatchState} to *IN_LINE*.
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played. Uses provided {@link MatchResult} for the
+     * {@link Match}. Sets the {@link MatchState} to *IN_LINE*.
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -70,9 +69,9 @@ public class Match {
     }
 
     /**
-     * Creates a {@link Match} object, containing a {@link List} of teams competing and a
-     * {@link Map} object on which the {@link Match} is played. Uses provided
-     * {@link MatchResult} for the {@link Match}, aswell as the provided {@link MatchState}
+     * Creates a {@link Match} object, containing a {@link List} of teams competing and a {@link
+     * Map} object on which the {@link Match} is played. Uses provided {@link MatchResult} for the
+     * {@link Match}, aswell as the provided {@link MatchState}
      *
      * @param teams {@link List} The {@link Team}s that are playing
      * @param map   {@link Map} The {@link Map} on which the {@link Match} is played.
@@ -106,11 +105,12 @@ public class Match {
         this.matchState = newMatchState;
     }
 
+    @Nullable
     public MatchResult getMatchResult() {
         return matchResult;
     }
 
-    public void setMatchResult(MatchResult matchResult) {
+    public void setMatchResult(@NonNull MatchResult matchResult) {
         this.matchResult = matchResult;
     }
 
@@ -127,33 +127,21 @@ public class Match {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Match match = (Match) o;
-
-        if (!teams.equals(match.teams)) {
-            return false;
-        }
-        if (matchState != match.matchState) {
-            return false;
-        }
-        if (!matchResult.equals(match.matchResult)) {
-            return false;
-        }
-        return map.equals(match.map);
+        return Objects.equals(teams, match.teams) &&
+            matchState == match.matchState &&
+            Objects.equals(matchResult, match.matchResult) &&
+            Objects.equals(map, match.map);
     }
 
     @Override
     public int hashCode() {
-        int result = teams.hashCode();
-        result = 31 * result + matchState.hashCode();
-        result = 31 * result + matchResult.hashCode();
-        result = 31 * result + map.hashCode();
-        return result;
+        return Objects.hash(teams, matchState, matchResult, map);
     }
 
     @Override
     public String toString() {
-        return "Match{" + "teams=" + teams + ", matchState=" + matchState
-                   + ", matchResult=" + matchResult + ", map=" + map + '}';
+        return "Match{" + "teams=" + teams + ", matchState=" + matchState +
+            ", matchResult=" + matchResult + ", map=" + map + '}';
     }
 }

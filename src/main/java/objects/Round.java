@@ -1,71 +1,122 @@
 package objects;
 
-import exceptions.OrderNotDefinedException;
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+
+import objects.auxiliary.CircularLinkedList;
+import objects.auxiliary.PeekableIterator;
+import objects.match.Match;
+import objects.team.Team;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A Round object contains multiple {@link Poule}s, aswell as an {@link Order} to traverse them in.
+ * A Round object contains one or multiple {@link Pool}s.
+ *
  * @author Toby T. van Willegen
  * @version 1.1, 2017-06-13.
  */
 public class Round {
-    private List<Poule> pouleList = new ArrayList<>();
-    private Random random = new Random();
-    private Order pouleOrder;
+    @Nullable
+    private Round nextRound = null;
+    @NonNull
+    private CircularLinkedList<Pool> pouleList;
+    @NonNull
+    private PeekableIterator<Pool> pouleIterator;
 
-    public Round(Order pouleOrder) {
-        this.pouleOrder = pouleOrder;
+    public Round() {
+        pouleList = new CircularLinkedList<>();
+        pouleIterator = pouleList.getIterator();
     }
 
-    public Round(Order pouleOrder, List<Poule> pouleList) {
-        this(pouleOrder);
-        this.pouleList = pouleList;
+    public Round(@NonNull List<Pool> poolList) {
+        this();
+        this.pouleList.addAll(poolList);
     }
 
     /**
-     * Returns the next {@link Poule} in the sequence, based on the
-     * {@link objects.Order} that is provided.
-     *
-     * @return Next {@link objects.Poule} in line as defined by the {@link objects.Order}
-     * @throws OrderNotDefinedException Throws this exception when there is no {@link
-     *                                  objects.Order}
-     *                                  defined in the Poule
+     * Returns the next {@link Pool} in the sequence.
      */
-    public Poule getNextPoule() throws OrderNotDefinedException {
-        switch (pouleOrder) {
-            case LINEAR:
-                return getNextLinearPoule();
-            case RANDOM:
-                return getNextRandomPoule();
-            default:
-                throw new OrderNotDefinedException();
-        }
-
+    public Pool getNextPoule() {
+        return pouleIterator.next();
     }
 
     /**
-     * Removes a {@link objects.Poule} from the list and returns *true* if
-     * it is
-     * removed.
+     * Checks if there is a next {@link Pool} in the sequence.
+     */
+    public boolean hasNextPoule() {
+        return pouleIterator.hasNext();
+    }
+
+    /**
+     * Returns the next {@link Match} in the sequence.
+     */
+    public Match getNextMatch() throws IndexOutOfBoundsException {
+        return pouleIterator.next().getNextMatch();
+    }
+
+    /**
+     * Peeks the next {@link Match} in the sequence.
+     */
+    public Match peekNextMatch() throws IndexOutOfBoundsException {
+        return pouleIterator.peek().peekNextMatch();
+    }
+
+    /**
+     * Checks if there is a next {@link Match} in the sequence.
+     */
+    public boolean hasNextMatch() {
+        return pouleIterator.hasNext() && pouleIterator.peek().hasNextMatch();
+    }
+
+    /**
+     * Returns a {@link java.util.Collection} of all the {@link Team}s that occur in all the {@link
+     * Pool}s in this Round.
      *
-     * @param pouleToRemove The {@link objects.Poule} to remove from the {@link objects.Poule}
+     * @return A collection containing unique instances of the {@link Team}s of all the {@link
+     *     Pool}s
+     */
+    public Collection<Team> getTeams() {
+        Pool startingPool = pouleIterator.next();
+        HashSet<Team> teamList = new HashSet<>(startingPool.getTeamList());
+
+        while (!pouleIterator.peek().equals(startingPool)) {
+            Pool pool = pouleIterator.next();
+            teamList.addAll(pool.getTeamList());
+        }
+        return teamList;
+    }
+
+    public Collection<Team> getTopTeams(@NonNull int topN) {
+        //TODO: make sure that the round has a way to get the top X
+        return new HashSet<>();
+    }
+
+    /**
+     * Removes a {@link Pool} from the list and returns *true* if it is removed.
+     *
+     * @param poolToRemove The {@link Pool} to remove from the {@link Pool}
      * @return (boolean) *True* if removed, *False* if not.
      */
-    public boolean removePoule(Poule pouleToRemove) {
-        return pouleList.remove(pouleToRemove);
+    public boolean removePoule(@NonNull Pool poolToRemove) {
+        return pouleList.remove(poolToRemove);
     }
 
-    public void addPoule(Poule pouleToAdd) {
-        pouleList.add(pouleToAdd);
+    public void addPoules(@NonNull List<@NonNull Pool> poolToAdd) {
+        pouleList.addAll(poolToAdd);
     }
 
-    private Poule getNextRandomPoule() {
-        return pouleList.get(random.nextInt(pouleList.size()));
+    public void addPoule(@NonNull Pool poolToAdd) {
+        pouleList.add(poolToAdd);
     }
 
-    private Poule getNextLinearPoule() {
-        return pouleList.get(0);
+    @Nullable
+    public Round getNextRound() {
+        return this.nextRound;
+    }
+
+    public void setNextRound(@Nullable Round round) {
+        this.nextRound = round;
     }
 }

@@ -82,6 +82,7 @@ public class Round {
 
 	public Collection<Team> getTopTeams(int topN) {
 		//TODO: make sure that the round has a way to get the top X
+		return new HashSet<>();
 	}
 
 	/**

@@ -133,7 +133,7 @@ public class CircularLinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
+	public PeekableIterator<T> iterator() {
 		throw new NotImplementedException();
 	}
 

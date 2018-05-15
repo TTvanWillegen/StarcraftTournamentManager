@@ -1,7 +1,6 @@
 package ui;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import javafx.application.Platform;
@@ -31,6 +30,7 @@ import objects.Order;
 import objects.Pool;
 import objects.Round;
 import objects.Tournament;
+import objects.auxiliary.PeekableCircularIterator;
 import objects.match.Match;
 import objects.team.Team;
 
@@ -110,6 +110,7 @@ public class RoundsTabController {
 		Round round = new Round(roundName);
 		Tournament.getInstance().addRound(round);
 
+		Separator separator = new Separator();
 		AnchorPane anchorPane = new AnchorPane();
 		Label label = new Label(roundName);
 		AnchorPane.setLeftAnchor(label, 10.0);
@@ -118,7 +119,11 @@ public class RoundsTabController {
 		Button button = new Button("Remove");
 		button.setOnAction(evt -> {
 			roundContent.getChildren().remove(anchorPane);
+			roundContent.getChildren().remove(separator);
 			Tournament.getInstance().removeRound(round);
+			if (selectedRound != null && selectedRound.equals(round)) {
+				selectedRound = null;
+			}
 		});
 		AnchorPane.setRightAnchor(button, 20.0);
 		AnchorPane.setTopAnchor(button, 7.0);
@@ -128,7 +133,6 @@ public class RoundsTabController {
 			event -> roundClicked(event, anchorPane, round));
 		roundContent.getChildren().add(anchorPane);
 
-		Separator separator = new Separator();
 		separator.setOrientation(Orientation.HORIZONTAL);
 		roundContent.getChildren().add(separator);
 
@@ -151,27 +155,25 @@ public class RoundsTabController {
 	}
 
 	private void showPools(Round round) {
-		while (round.hasNextPool()) {
-			Pool pool = round.getNextPool();
+		poolContent.getChildren().clear();
+		PeekableCircularIterator<Pool> poolIterator = round.iterator();
+		while (poolIterator.hasNext()) {
+			Pool pool = poolIterator.next();
 
-			StringBuilder poolName = new StringBuilder();
-			Iterator<Team> teamIterator = pool.getTeamList().iterator();
-			while (teamIterator.hasNext()) {
-				if (!"".equals(poolName.toString())) {
-					poolName.append(" - ");
-				}
-				Team team = teamIterator.next();
-				poolName.append(team.getName());
-			}
+			Separator separator = new Separator();
 			AnchorPane anchorPane = new AnchorPane();
-			Label label = new Label(poolName.toString());
+			Label label = new Label(pool.getPoolName());
 			AnchorPane.setLeftAnchor(label, 10.0);
 			AnchorPane.setTopAnchor(label, 12.0);
 
 			Button button = new Button("Remove");
 			button.setOnAction(evt -> {
 				poolContent.getChildren().remove(anchorPane);
+				poolContent.getChildren().remove(separator);
 				round.removePool(pool);
+				if (selectedPool != null && selectedPool.equals(pool)) {
+					selectedPool = null;
+				}
 			});
 			AnchorPane.setRightAnchor(button, 20.0);
 			AnchorPane.setTopAnchor(button, 7.0);
@@ -182,7 +184,6 @@ public class RoundsTabController {
 			});
 			poolContent.getChildren().add(anchorPane);
 
-			Separator separator = new Separator();
 			separator.setOrientation(Orientation.HORIZONTAL);
 			poolContent.getChildren().add(separator);
 		}
@@ -243,7 +244,7 @@ public class RoundsTabController {
 	@FXML
 	public void addPoolClick(ActionEvent actionEvent) throws IOException {
 		if (selectedRound == null) {
-			return;
+			addRoundClick(actionEvent);
 		}
 
 		// Create the custom dialog.
@@ -306,9 +307,14 @@ public class RoundsTabController {
 		dialog.setResultConverter(button -> {
 			// here you can also check what button was pressed
 			// and return things accordingly
-			return new PoolCreationResult(roundName.getText(),
-			                              (Order) orderGroup.getSelectedToggle
-				                              ().getUserData());
+			if (ButtonBar.ButtonData.OK_DONE.equals(button.getButtonData())) {
+				return new PoolCreationResult(roundName.getText(),
+				                              (Order) orderGroup
+					                              .getSelectedToggle()
+					                              .getUserData());
+			} else {
+				return null;
+			}
 		});
 		Optional<PoolCreationResult> result = dialog.showAndWait();
 

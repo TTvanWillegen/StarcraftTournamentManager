@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import objects.auxiliary.CircularLinkedList;
+import objects.auxiliary.PeekableCircularIterator;
 import objects.auxiliary.PeekableIterator;
 import objects.match.Match;
 import objects.team.Team;
@@ -24,31 +25,16 @@ public class Round {
 
 	private CircularLinkedList<Pool> pouleList;
 
-	private PeekableIterator<Pool> pouleIterator;
+	private PeekableCircularIterator<Pool> pouleIterator;
 
 	public Round(String name) {
 		this.name = name;
 		pouleList = new CircularLinkedList<>();
-		pouleIterator = pouleList.iterator();
 	}
 
 	public Round(String name, List<Pool> poolList) {
 		this(name);
 		this.pouleList.addAll(poolList);
-	}
-
-	/**
-	 * Returns the next {@link Pool} in the sequence.
-	 */
-	public Pool getNextPool() {
-		return pouleIterator.next();
-	}
-
-	/**
-	 * Checks if there is a next {@link Pool} in the sequence.
-	 */
-	public boolean hasNextPool() {
-		return pouleIterator.hasNext();
 	}
 
 	/**
@@ -58,6 +44,9 @@ public class Round {
 		return pouleIterator.next().getNextMatch();
 	}
 
+	public PeekableCircularIterator<Pool> iterator(){
+		return pouleList.iterator();
+	}
 	/**
 	 * Peeks the next {@link Match} in the sequence.
 	 */

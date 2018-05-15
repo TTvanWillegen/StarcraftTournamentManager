@@ -2,7 +2,6 @@ package objects.auxiliary;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
@@ -133,8 +132,8 @@ public class CircularLinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public PeekableIterator<T> iterator() {
-		throw new NotImplementedException();
+	public PeekableCircularIterator<T> iterator() {
+		return new PeekableCircularIterator<>(head);
 	}
 
 	@Override
@@ -149,7 +148,8 @@ public class CircularLinkedList<T> implements List<T> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked") //You cannot instantiate a Generic
+	@SuppressWarnings("unchecked")
+	// You cannot instantiate a Generic
 	// directly, therefore you need the hacky a.getClass method. This then
 	// needs to be cast which results in an unchecked warning.
 	public <T1> T1[] toArray(T1[] a) {
@@ -276,6 +276,40 @@ public class CircularLinkedList<T> implements List<T> {
 
 		return finalString;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		CircularLinkedList<?> that = (CircularLinkedList<?>) o;
+
+		if (this.size != that.size) {
+			return false;
+		}
+		Node thisNode = this.head;
+		Node thatNode = that.head;
+		do {
+			if (thisNode == null && thatNode == null) {
+				return true;
+			} else if ((thisNode == null || thatNode == null) ||
+				!thisNode.getData().equals(thatNode.getData())) {
+				return false;
+			}
+			thisNode = thisNode.getNext();
+			thatNode = thatNode.getNext();
+		} while (thisNode != null && thisNode != this.head);
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(size, head, tail);
+	}
 }
 
 class Node<A> {
@@ -300,5 +334,35 @@ class Node<A> {
 
 	void setNext(Node<A> next) {
 		this.next = next;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Node thatNode = (Node) o;
+
+		Node thisNextNode = this.next;
+		Node thatNextNode = thatNode.next;
+		do {
+			if (thisNextNode == null && thatNextNode == null) {
+				return true;
+			} else if ((thisNextNode == null || thatNextNode == null) ||
+				!thisNextNode.getData().equals(thatNextNode.getData())) {
+				return false;
+			}
+			thisNextNode = thisNextNode.getNext();
+			thatNextNode = thatNextNode.getNext();
+		} while (thisNextNode != null && thisNextNode != this);
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(data, next);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import objects.Order;
 import objects.match.Match;
-import org.checkerframework.checker.nullness.qual.NonNull;
+
 
 /**
  * Stores the Matches of a Pool together with an order.
@@ -15,7 +15,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 public class MatchList extends ArrayList<Match> {
     private Order order;
 
-    public MatchList(@NonNull Order order) {
+    public MatchList( Order order) {
         this.order = order;
     }
 

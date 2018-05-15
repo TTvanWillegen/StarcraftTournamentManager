@@ -2,8 +2,8 @@ package objects;
 
 import java.io.File;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+
+
 
 
 /**
@@ -14,23 +14,23 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @version 1.1, 2017-06-13.
  */
 public class Map {
-    @NonNull
+
     private String mapName;
-    @Nullable
+
     private File mapFile = null;
-    @NonNull
+
     private int maxAmountOfTeams;
 
-    public Map(@NonNull String mapName, @NonNull int maxAmountOfTeams) {
+    public Map( String mapName,  int maxAmountOfTeams) {
         this.mapName = mapName;
         this.maxAmountOfTeams = maxAmountOfTeams;
     }
 
-    public void useFile(@NonNull File file) {
+    public void useFile( File file) {
         this.mapFile = file;
     }
 
-    @Nullable
+
     public File getMapFile() {
         return this.mapFile;
     }
@@ -49,7 +49,7 @@ public class Map {
     }
 
     @Override
-    public boolean equals(@Nullable Object o) {
+    public boolean equals( Object o) {
         if (this == o) {
             return true;
         }

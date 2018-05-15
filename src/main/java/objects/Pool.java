@@ -10,8 +10,8 @@ import objects.auxiliary.PeekableIterator;
 import objects.match.Match;
 import objects.match.MatchState;
 import objects.team.Team;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+
+
 
 /**
  * A Pool object contains multiple {@link Match}es aswell as an {@link Order} in which to traverse
@@ -21,11 +21,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @version 1.1, 2017-06-13.
  */
 public class Pool {
-    @NonNull
+	private String poolName;
+
     private Collection<Team> teamList;
-    @NonNull
+
     private MatchList matchList;
-    @NonNull
+
     private PeekableIterator<Match> matchIterator;
 
     /**
@@ -33,18 +34,19 @@ public class Pool {
      *
      * @param matchOrder {@link Order} The order to traverse the matches through.
      */
-    public Pool(@NonNull Order matchOrder) {
+    public Pool(String poolName, Order matchOrder) {
+    	this.poolName = poolName;
         this.matchList = new MatchList(matchOrder);
         this.matchIterator = matchList.iterator();
         this.teamList = new ArrayList<>();
     }
 
-    public Pool(@NonNull Order matchOrder, @NonNull List<Team> teams) {
-        this(matchOrder);
+    public Pool(String poolName, Order matchOrder,  List<Team> teams) {
+        this(poolName, matchOrder);
         this.teamList = teams;
     }
 
-    public boolean addTeam(@NonNull Team team) {
+    public boolean addTeam( Team team) {
         return teamList.contains(team) || this.teamList.add(team);
     }
 
@@ -87,16 +89,16 @@ public class Pool {
      * @param matchToRemove The {@link Match} to remove from the {@link Pool}
      * @return (boolean) *True* iff removed, *False* if not.
      */
-    public boolean removeMatch(@NonNull Match matchToRemove) {
+    public boolean removeMatch( Match matchToRemove) {
         return matchList.remove(matchToRemove);
     }
 
-    public void addMatches(@NonNull List<@NonNull Match> matchesToAdd) {
+    public void addMatches( List< Match> matchesToAdd) {
         matchList.addAll(matchesToAdd);
     }
 
     @Override
-    public boolean equals(@Nullable Object o) {
+    public boolean equals( Object o) {
         if (this == o) {
             return true;
         }

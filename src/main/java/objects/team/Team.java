@@ -2,8 +2,8 @@ package objects.team;
 
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+
+
 
 /**
  * A Team object contains a TeamName, aswell as a {@link TeamRace}, amount of games played and
@@ -13,9 +13,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @version 1.1, 2017-06-13.
  */
 public class Team {
-    @NonNull
+
     private String name;
-    @NonNull
+
     private TeamRace teamRace;
 
     /**
@@ -25,24 +25,24 @@ public class Team {
      * @param name     {@link String}The name the team gets.
      * @param teamRace {@link TeamRace} The race the team gets.
      */
-    public Team(@NonNull String name, @NonNull TeamRace teamRace) {
+    public Team( String name,  TeamRace teamRace) {
         this.name = name;
         this.teamRace = teamRace;
     }
 
-    @NonNull
+
     public String getName() {
         return name;
     }
 
-    @NonNull
+
     public TeamRace getTeamRace() {
         return teamRace;
     }
 
 
     @Override
-    public boolean equals(@Nullable Object o) {
+    public boolean equals( Object o) {
         if (this == o) {
             return true;
         }
@@ -58,7 +58,7 @@ public class Team {
         return Objects.hash(name, teamRace);
     }
 
-    @NonNull
+
     @Override
     public String toString() {
         return "Team{" + "name='" + name + '\'' + ", teamRace=" + teamRace +

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 import objects.team.Team;
-import org.checkerframework.checker.nullness.qual.NonNull;
+
 
 /**
  * Object contains a {@link Map} of {@link Team}s with scores, also contains methods to check winner
@@ -17,14 +17,14 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @version 1.1, 2017-09-14.
  */
 public class MatchResult {
-    @NonNull
+
     private Map<Team, Double> teamScores;
 
     public MatchResult() {
         this.teamScores = new HashMap<>();
     }
 
-    public MatchResult(@NonNull Map<Team, Double> teamScores) {
+    public MatchResult( Map<Team, Double> teamScores) {
         this.teamScores = teamScores;
     }
 
@@ -34,7 +34,7 @@ public class MatchResult {
      * @param team  The {@link Team} to add the score for
      * @param score The score te add
      */
-    public void setScore(@NonNull Team team, @NonNull double score) {
+    public void setScore(Team team,  double score) {
         this.teamScores.put(team, score);
     }
 
